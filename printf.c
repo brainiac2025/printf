@@ -13,7 +13,9 @@ int _printf(const char *format, ...)
 
 	format_mapping *format_map = get_format_map();
 	va_start(argument, format);
-	if (format == NULL)
+	if (!format || (format[0] == '%' && !format[1]))
+		return (-1);
+	if (format[0] == '%' && format[1] == ' ' && !format[2])
 		return (-1);
 
 	for (i = 0; format[i] != '\0'; i++)
@@ -24,11 +26,6 @@ int _printf(const char *format, ...)
 			{
 				display('%');
 				i++;
-			}
-			else if (format[i + 1] == '\0' || format[i + 1] == ' ')
-			{
-				va_end(argument);
-				return (-1);
 			}
 			else
 			{
