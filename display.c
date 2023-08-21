@@ -25,3 +25,23 @@ int mylen(char *string)
 	}
 	return (index);
 }
+
+/**
+ * _putchar - function to writes character to stdout
+ * @chr: the character
+ * Return:1 on success
+ */
+int _putchar(int chr)
+{
+	static int inc;
+	static char buffer[BUFF_SIZE];
+
+	if (chr == FLUSH_BUFF || inc >= BUFF_SIZE)
+	{
+		write(1, buffer, inc);
+		inc = 0;
+	}
+	if (chr != FLUSH_BUSH)
+		buffer[inc++] = chr;
+	return (1);
+}

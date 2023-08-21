@@ -80,3 +80,58 @@ void print_integer(va_list argument)
 	}
 	free(mynum);
 }
+
+/**
+ * find_width - function to that get width from the format string
+ * @ch: the format
+ * @argument: the va_list arg
+ * @flag: the flag
+ * Return: the string
+ */
+char *find_width(char *ch, va_list argument, flag *flag)
+{
+	int temp = 0;
+
+	if (*ch == '*')
+	{
+		temp = va_arg(argument, int);
+		ch++;
+	}
+	else
+	{
+		while (_isdigit(*ch))
+			temp = temp * 10 + (*ch++ - '0');
+	}
+	flag->width = temp;
+	return (ch);
+}
+
+/**
+ * find_precise - function that get position from format string
+ * @ch: the format string
+ * @argument: the va_list arg
+ * @flag, the flag format
+ * Return: pointer to the function
+ */
+char *find_precise(char *ch, va_list argument, flag *flag)
+{
+	int precise = 0;
+
+	if (*ch != '.')
+		return (ch);
+
+	ch++;
+
+	if (*ch == '*')
+	{
+		precise = va_arg(argument, int);
+		ch++;
+	}
+	else
+	{
+		while (_isdigit(*ch))
+			precise = precise * 10 + (*ch++ - '0');
+	}
+	flag->precise = precise;
+	return (ch);
+}

@@ -8,8 +8,11 @@
 int _printf(const char *format, ...)
 {
 	int i, j;
+	int count = 0;
 	va_list argument;
 	char specifier;
+	char *begin *ptr;
+	flag *flag = FLAG_OFF; 
 
 	format_mapping *format_map = get_format_map();
 	va_start(argument, format);
@@ -20,35 +23,30 @@ int _printf(const char *format, ...)
 
 	for (i = 0; format[i] != '\0'; i++)
 	{
-		if (format[i] == '%')
+		flag_init(&flag, argument);
+		if (*ptr != '%')
 		{
-			if (format[i + 1] == '%')
-			{
-				display('%');
-				i++;
-			}
-			else
-			{
-				specifier = format[i + 1];
-				j = 0;
+			count = count + _putchar(*ptr);
+			continue;
+		}
+		begin = ptr;
+		ptr++;
+		while (find_flag(ptr, &flag))
+		{
+			ptr++;
+		}
+		ptr = find_width(ptr, argument, &flag);
+		ptr = find_precise(ptr, &flag, argument);
 
-				while (format_map[j].format != 0)
-				{
-					if (format_map[j].format == specifier)
-					{
-						format_map[j].print_format(argument);
-						break;
-					}
-					j++;
-				}
-				i++;
-			}
-		}
+		if (find_modifier(ptr, &flag))
+			ptr++;
+		if (!get_format(ptr))
+			count += print_range(begin, ptr, flag.l_modifier
+					|| flag.h_modifier ? ptr - 1 : 0);
 		else
-		{
-			display(format[i]);
-		}
+			count += find_func_toprint(ptr, argument, &flag);
 	}
+	_putchar(FLUSH_BUFF);
 	va_end(argument);
-	return (i);
+	return (count;
 }
