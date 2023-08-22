@@ -7,10 +7,10 @@
  */
 int _printf(const char *format, ...)
 {
-	int i, count = 0;
+	int count = 0;
 	va_list argument;
 	char *begin, *ptr;
-	flag flag = FLAG_OFF; 
+	flag flag = FLAG_OFF;
 
 	va_start(argument, format);
 	if (!format || (format[0] == '%' && !format[1]))
@@ -18,7 +18,7 @@ int _printf(const char *format, ...)
 	if (format[0] == '%' && format[1] == ' ' && !format[2])
 		return (-1);
 
-	for (i = 0; format[i] != '\0'; i++)
+	for (ptr = (char *)format; *ptr;  ptr++)
 	{
 		flag_init(&flag, argument);
 		if (*ptr != '%')

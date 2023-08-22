@@ -2,7 +2,7 @@
 
 /**
  * flag_init - clear the struct and reset
- * @flag: the parameter flag
+ * @flags: the parameter flag
  * @argument: the va_list argument
  * Return: void
  */
@@ -15,7 +15,7 @@ void flag_init(flag *flags, va_list argument)
 	flags->zero = 0;
 	flags->minus = 0;
 	flags->width = 0;
-	flags->precise =UINT_MAX;
+	flags->precise = UINT_MAX;
 	flags->h_modifier = 0;
 	flags->l_modifier = 0;
 

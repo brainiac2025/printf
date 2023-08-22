@@ -3,6 +3,7 @@
 /**
  * reverse_string - function to reverse a string
  * @argument: - string to reverse
+ * @flag: the flag specify
  * Return: void
  */
 int reverse_string(va_list argument, flag *flag)
@@ -45,7 +46,7 @@ int rot13(va_list argument, flag *flag)
 	(void)flag;
 
 	if (myrot == NULL)
-		return(0);
+		return (0);
 
 	index = 0;
 	while (string[index] != '\0')

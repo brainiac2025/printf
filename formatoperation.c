@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * get_specifier - finds the format
+ * get_format - finds the format
  * @ch: the format string
  * Return: the number of bytes printed
  */
-int (*get_format(char *ch)) (va_list argument, flag *flag)
+int (*get_format(char *ch))(va_list argument, flag *flag)
 {
 	format_mapping format_map[] = {
 		{"c", print_character},
@@ -24,7 +24,7 @@ int (*get_format(char *ch)) (va_list argument, flag *flag)
 		{"r", reverse_string},
 		{NULL, NULL}
 	};
-	
+
 	int index = 0;
 
 	while (format_map[index].format)
@@ -38,9 +38,9 @@ int (*get_format(char *ch)) (va_list argument, flag *flag)
 
 /**
  * find_func_toprint - function that find the format function
- * @ch@: the format string
+ * @ch: the format string
  * @argument: the va_list argument
- * @flag: the flag
+ * @flags: the flag
  * Return: the number of bytes printed
  */
 int find_func_toprint(char *ch, va_list argument, flag *flags)
@@ -89,7 +89,7 @@ int find_flag(char *ch, flag *flag)
  * find_modifier - function to
  * @ch: the format string
  * @flag: the flag struct
- * Return modifier if found
+ * Return: modifier if found
  */
 int find_modifier(char *ch, flag *flag)
 {
@@ -99,5 +99,5 @@ int find_modifier(char *ch, flag *flag)
 		mymodifier = flag->l_modifier = 1;
 	else if (*ch == 'h')
 		mymodifier = flag->h_modifier = 1;
-	return(mymodifier);
+	return (mymodifier);
 }
