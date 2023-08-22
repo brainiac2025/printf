@@ -9,7 +9,9 @@
 
 #define BUFF_SIZE 1024
 #define FLUSH_BUFF -1
-
+#define CHANGE_UNSIGNED 2
+#define CONVERT_HEX_CASE 1
+#define TRUE 1
 #define NULL_S "(null)"
 
 #define FLAG_OFF {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
@@ -20,7 +22,7 @@
  * @hash: on if #
  * @zero: on if 0
  * @minus: on if -
- *
+ * @unsign: on
  * @width: field width specifier
  * @precise: field precision specifield
  *
@@ -127,5 +129,21 @@ int _isdigit(int ch);
 int print_range(char *begin, char *end, char *skip);
 
 int print_percent(va_list argument, flag *flag);
+
+int handlePositiveSign(unsigned int *count, flag *flags,
+		unsigned int *len, int neg2);
+
+void addPadding(unsigned int *count, flag *flags,
+		unsigned int *len, char pad_char);
+
+int print_alignment(char *str, flag *flags, int isRightAlignment);
+
+int print_right_alignment(char *str, flag *flags);
+
+int print_left_alignment(char *str, flag *flags);
+
+int display_number(char *str, flag *flags);
+
+char *to_base(long int num, int base, int sign_unsign, flag *flags);
 
 #endif

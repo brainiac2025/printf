@@ -19,76 +19,57 @@ unsigned int count_hex_digit(unsigned int num)
 /**
  * print_octal - function to print unsigned int
  * @argument: number to print
- * @flag: flag specifier
+ * @flags: flag specifier
  * Return: void
  */
-int print_octal(va_list argument, flag *flag)
+int print_octal(va_list argument, flag *flags)
 {
-	unsigned int num = va_arg(argument, unsigned int);
-	int i;
-	int j;
-	unsigned int octlen = oct_len(num);
-	char *myoct;
+	unsigned long num;
+	char *string;
 	int count = 0;
-	(void)flag;
 
-	if (num == 0)
+	if (flags->l_modifier)
 	{
-		count += _putchar('0');
-		return (0);
+		num = (unsigned long)va_arg(argument, unsigned long);
 	}
-	myoct = malloc(sizeof(char) * octlen);
-	i = 0;
-
-	while (num > 0)
+	else if (flags->h_modifier)
 	{
-		myoct[i] = (num % 8) + '0';
-		num /= 8;
-		i++;
+		num = (unsigned short int)va_arg(argument, unsigned int);
+	}
+	else
+	{
+		num = (unsigned int)va_arg(argument, unsigned int);
 	}
 
-	for (j = octlen - 1; j >= 0; j--)
+	string = to_base(num, 8, CHANGE_UNSIGNED, flags);
+
+	if (flags->hash && num)
 	{
-		count += _putchar(myoct[j]);
+		*--string = '0';
 	}
-	free(myoct);
-	return (count);
+
+	flags->unsign = 1;
+	return (count += display_number(string, flags));
 }
 
 /**
  * print_unsigned_int - function to print octal number
  * @argument: decimal number
- * @flag: flag specifier
+ * @flags: flag specifier
  * Return: void
  */
-int print_unsigned_int(va_list argument, flag *flag)
+int print_unsigned_int(va_list argument, flag *flags)
 {
-	unsigned int num = va_arg(argument, unsigned int);
-	unsigned int i;
-	unsigned int numdigit;
-	int j;
-	char *mynum;
-	int count = 0;
-	(void)flag;
+	unsigned long num;
 
-	if (num == 0)
-		_putchar('0');
-
-	numdigit = count_digit(num);
-	mynum = malloc(sizeof(char) * numdigit);
-
-	for (i = 0; i < numdigit; i++)
-	{
-		mynum[i] = (num % 10) + '0';
-		num /= 10;
-	}
-
-	for (j = numdigit - 1; j >= 0; j--)
-	{
-		count += _putchar(mynum[j]);
-	}
-	free(mynum);
-	return (count);
+	if (flags->l_modifier)
+		num = (unsigned long)va_arg(argument, unsigned long);
+	else if (flags->h_modifier)
+		num = (unsigned short int)va_arg(argument, unsigned int);
+	else
+		num = (unsigned int)va_arg(argument, unsigned int);
+	flags->unsign = 1;
+	return (display_number(to_base(num, 10, CHANGE_UNSIGNED, flags), flags));
 }
 
 /**

@@ -1,22 +1,4 @@
 #include "main.h"
-
-/**
- * oct_len - function to calculate octal len
- * @num: the number
- * Return: the len
- */
-unsigned int oct_len(unsigned int num)
-{
-	unsigned int count;
-
-	count = 0;
-
-	if (num > 0)
-		count = 1 + (oct_len(num / 8));
-	else
-		return (0);
-	return (count);
-}
 /**
  * count_digit - function to count digit len of base 10
  * @num: chractert to count
@@ -39,50 +21,26 @@ unsigned int count_digit(unsigned int num)
 /**
  * print_integer - function to print Decimal number
  * @argument: number to print
- * @flag: flag specifier
+ * @flags: flag specifier
  * Return: coutn
  */
-int print_integer(va_list argument, flag *flag)
+int print_integer(va_list argument, flag *flags)
 {
-	int num = va_arg(argument, int);
-	int n;
-	int i;
-	int j;
-	int numdigit;
-	char *mynum;
-	int count = 0;
-	(void)flag;
+	long num;
 
-	if (num == 0)
+	if (flags->l_modifier)
 	{
-		_putchar('0');
+		num = va_arg(argument, long);
 	}
-
-	if (num < 0)
+	else if (flags->h_modifier)
 	{
-		_putchar('-');
-		n = -num;
+		num = (short int)va_arg(argument, int);
 	}
 	else
 	{
-		n = num;
+		num = (int)va_arg(argument, int);
 	}
-
-	numdigit = count_digit(n);
-	mynum = malloc(sizeof(char) * numdigit);
-
-	for (i = 0; i < numdigit; i++)
-	{
-		mynum[i] = (n % 10) + '0';
-		n /= 10;
-	}
-
-	for (j = numdigit - 1; j >= 0; j--)
-	{
-		count += _putchar(mynum[j]);
-	}
-	free(mynum);
-	return (count);
+	return (display_number(to_base(num, 10, 0, flags), flags));
 }
 
 /**
