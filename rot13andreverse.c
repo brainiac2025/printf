@@ -3,29 +3,29 @@
 /**
  * reverse_string - function to reverse a string
  * @argument: - string to reverse
- * @flag: the flag specify
+ * @flags: the flag specify
  * Return: void
  */
-int reverse_string(va_list argument, flag *flag)
+int reverse_string(va_list argument, flag *flags)
 {
 	char *string = va_arg(argument, char *);
-	int length = mylen(string);
-	int i, j;
+	int length;
 	int count = 0;
-	char *temp = malloc(length + 1);
-	(void)flag;
+	(void)flags;
 
-	for (i = 0; i < length; i++)
+	if (string)
 	{
-		temp[i] = string[length - i - 1];
-	}
-	temp[i] = '\0';
-	for (j = 0; temp[j] != '\0'; j++)
-	{
-		count += _putchar(temp[j]);
-	}
+		for (length = 0; *string; string++)
+		{
+			length++;
+		}
+		string--;
 
-	free(temp);
+		for (; length > 0; length--, string--)
+		{
+			count += _putchar(*string);
+		}
+	}
 	return (count);
 }
 
