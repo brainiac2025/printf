@@ -22,14 +22,17 @@ void char_to_hex(char c, char *hex)
 /**
  * string_miss_char - function to escape some character
  * @argument: the string
+ * @flag: flag specifier
  * Return: void
  */
-void string_miss_char(va_list argument)
+int string_miss_char(va_list argument, flag *flag)
 {
 	char *str = va_arg(argument, char*);
 	int index, ascivalue;
 	int i;
 	char sub[4];
+	int count = 0;
+	(void)flag;
 
 	for (index = 0; str[index] != '\0'; index++)
 	{
@@ -48,6 +51,7 @@ void string_miss_char(va_list argument)
 			index++;
 		}
 
-		display(str[index]);
+		count += _putchar(str[index]);
 	}
+	return (count);
 }

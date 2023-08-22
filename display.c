@@ -41,7 +41,7 @@ int _putchar(int chr)
 		write(1, buffer, inc);
 		inc = 0;
 	}
-	if (chr != FLUSH_BUSH)
+	if (chr != FLUSH_BUFF)
 		buffer[inc++] = chr;
 	return (1);
 }

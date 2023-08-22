@@ -8,23 +8,24 @@
 int (*get_format(char *ch)) (va_list argument, flag *flag)
 {
 	format_mapping format_map[] = {
-		{'c', print_character},
-		{'s', print_string},
-		{'i', print_integer},
-		{'d', print_integer},
-		{'b', print_binary},
-		{'u', print_unsigned_int},
-		{'o', print_octal},
-		{'x', print_hex_lower},
-		{'X', print_hex_upper},
-		{'S', string_miss_char},
-		{'p', print_address},
-		{'R', rot13},
-		{'r', reverse_string},
+		{"c", print_character},
+		{"s", print_string},
+		{"i", print_integer},
+		{"d", print_integer},
+		{"b", print_binary},
+		{"u", print_unsigned_int},
+		{"o", print_octal},
+		{"x", print_hex_lower},
+		{"X", print_hex_upper},
+		{"%", print_percent},
+		{"S", string_miss_char},
+		{"p", print_address},
+		{"R", rot13},
+		{"r", reverse_string},
 		{NULL, NULL}
 	};
 	
-	int index i = 0;
+	int index = 0;
 
 	while (format_map[index].format)
 	{
@@ -42,12 +43,12 @@ int (*get_format(char *ch)) (va_list argument, flag *flag)
  * @flag: the flag
  * Return: the number of bytes printed
  */
-int find_func_toprint(char *ch, va_list argument, flag *flag)
+int find_func_toprint(char *ch, va_list argument, flag *flags)
 {
 	int (*print_format)(va_list, flag *) = get_format(ch);
 
 	if (print_format)
-		return (print_format(argument, flag));
+		return (print_format(argument, flags));
 	return (0);
 }
 

@@ -19,20 +19,23 @@ unsigned int count_hex_digit(unsigned int num)
 /**
  * print_octal - function to print unsigned int
  * @argument: number to print
+ * @flag: flag specifier
  * Return: void
  */
-void print_octal(va_list argument)
+int print_octal(va_list argument, flag *flag)
 {
 	unsigned int num = va_arg(argument, unsigned int);
 	int i;
 	int j;
 	unsigned int octlen = oct_len(num);
 	char *myoct;
+	int count = 0;
+	(void)flag;
 
 	if (num == 0)
 	{
-		display('0');
-		return;
+		count += _putchar('0');
+		return (0);
 	}
 	myoct = malloc(sizeof(char) * octlen);
 	i = 0;
@@ -46,23 +49,27 @@ void print_octal(va_list argument)
 
 	for (j = octlen - 1; j >= 0; j--)
 	{
-		display(myoct[j]);
+		count += _putchar(myoct[j]);
 	}
 	free(myoct);
+	return (count);
 }
 
 /**
  * print_unsigned_int - function to print octal number
  * @argument: decimal number
+ * @flag: flag specifier
  * Return: void
  */
-void print_unsigned_int(va_list argument)
+int print_unsigned_int(va_list argument, flag *flag)
 {
 	unsigned int num = va_arg(argument, unsigned int);
 	unsigned int i;
 	unsigned int numdigit;
 	int j;
 	char *mynum;
+	int count = 0;
+	(void)flag;
 
 	if (num == 0)
 		display('0');
@@ -78,25 +85,29 @@ void print_unsigned_int(va_list argument)
 
 	for (j = numdigit - 1; j >= 0; j--)
 	{
-		display(mynum[j]);
+		count += _putchar(mynum[j]);
 	}
 	free(mynum);
+	return (count);
 }
 
 /**
  * print_hex_lower - function to print hexadecimal in lowercase
  * @argument: decimal number entered
+ * @flag: flag specifier
  * Return: void
  */
-void print_hex_lower(va_list argument)
+int print_hex_lower(va_list argument, flag *flag)
 {
 	unsigned int num = va_arg(argument, unsigned int);
 	unsigned int i, base, remain;
 	unsigned int digitlen = count_hex_digit(num);
 	char *myhex = malloc(sizeof(char) * (digitlen + 1));
+	int count = 0;
+	(void)flag;
 
 	if (myhex == NULL)
-		return;
+		return (0);
 
 	base = 16;
 
@@ -112,25 +123,29 @@ void print_hex_lower(va_list argument)
 	}
 	for (i = 0; i <= digitlen; i++)
 	{
-		display(myhex[i]);
+		count += _putchar(myhex[i]);
 	}
 	free(myhex);
+	return (count);
 }
 
 /**
  * print_hex_upper - function to print hexadecimal in upper
  * @argument: decimal number entered
+ * @flag: flag specifier
  * Return: void
  */
-void print_hex_upper(va_list argument)
+int print_hex_upper(va_list argument, flag *flag)
 {
 	unsigned int num = va_arg(argument, unsigned int);
 	unsigned int i, base, remain;
 	unsigned int digitlen = count_hex_digit(num);
 	char *myhex = malloc(sizeof(char) * (digitlen + 1));
+	int count = 0;
+	(void)flag;
 
 	if (myhex == NULL)
-		return;
+		return (0);
 
 	base = 16;
 
@@ -147,7 +162,8 @@ void print_hex_upper(va_list argument)
 
 	for (i = 0; i <= digitlen; i++)
 	{
-		display(myhex[i]);
+		count += _putchar(myhex[i]);
 	}
 	free(myhex);
+	return (count);
 }

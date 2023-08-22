@@ -20,18 +20,21 @@ unsigned int binarylen(unsigned int num)
 /**
  * print_binary - function to printbinary
  * @argument: decimal number pass
+ * @flag: flag specifier
  * Return: void
  */
-void print_binary(va_list argument)
+int print_binary(va_list argument, flag *flag)
 {
 	unsigned int n = va_arg(argument, unsigned int);
 	unsigned int i, j;
+	int count = 0;
 	unsigned int *mybinary = malloc(sizeof(unsigned int) * binarylen(n));
+	(void)flag;
 
 	if (n == 0)
 	{
 		display('0');
-		return;
+		return (0);
 	}
 
 	i = 0;
@@ -44,7 +47,8 @@ void print_binary(va_list argument)
 
 	for (j = i - 1; j > 0; j--)
 	{
-		display(mybinary[j] + '0');
+		count += _putchar(mybinary[j] + '0');
 	}
 	free(mybinary);
+	return (count);
 }

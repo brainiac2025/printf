@@ -39,9 +39,10 @@ unsigned int count_digit(unsigned int num)
 /**
  * print_integer - function to print Decimal number
  * @argument: number to print
- * Return: void
+ * @flag: flag specifier
+ * Return: coutn
  */
-void print_integer(va_list argument)
+int print_integer(va_list argument, flag *flag)
 {
 	int num = va_arg(argument, int);
 	int n;
@@ -49,6 +50,8 @@ void print_integer(va_list argument)
 	int j;
 	int numdigit;
 	char *mynum;
+	int count = 0;
+	(void)flag;
 
 	if (num == 0)
 	{
@@ -76,9 +79,10 @@ void print_integer(va_list argument)
 
 	for (j = numdigit - 1; j >= 0; j--)
 	{
-		display(mynum[j]);
+		count += _putchar(mynum[j]);
 	}
 	free(mynum);
+	return (count);
 }
 
 /**
@@ -113,7 +117,7 @@ char *find_width(char *ch, va_list argument, flag *flag)
  * @flag, the flag format
  * Return: pointer to the function
  */
-char *find_precise(char *ch, va_list argument, flag *flag)
+char *find_precise(char *ch, flag *flag, va_list argument)
 {
 	int precise = 0;
 

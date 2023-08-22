@@ -44,19 +44,23 @@ void address_to_hex(void *ptr, char *hexstring)
 /**
  * print_address - function to print address
  * @argument: pointer
+ * @flag: flag specifier
  * Return: void
  */
-void print_address(va_list argument)
+int print_address(va_list argument, flag *flag)
 {
 	void *ptr = va_arg(argument, void *);
 	char myadr[sizeof(void *) * 2 + 1];
 	int index;
+	int count = 0;
+	(void)flag;
 
 	address_to_hex(ptr, myadr);
 	reverse(myadr);
 
 	for (index = 0; myadr[index] != '\0'; index++)
 	{
-		display(myadr[index]);
+		count += _putchar(myadr[index]);
 	}
+	return (count);
 }

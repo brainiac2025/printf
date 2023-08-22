@@ -31,9 +31,10 @@ int reverse_string(va_list argument, flag *flag)
 /**
  * rot13 - function that print rot13'ed string
  * @argument:  the string
+ * @flag: flag specifier
  * Return: void
  */
-void rot13(va_list argument, flag *flag)
+int rot13(va_list argument, flag *flag)
 {
 	char *string = va_arg(argument, char *);
 	int index, index2, i;
@@ -44,7 +45,7 @@ void rot13(va_list argument, flag *flag)
 	(void)flag;
 
 	if (myrot == NULL)
-		return;
+		return(0);
 
 	index = 0;
 	while (string[index] != '\0')

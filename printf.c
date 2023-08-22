@@ -7,14 +7,11 @@
  */
 int _printf(const char *format, ...)
 {
-	int i, j;
-	int count = 0;
+	int i, count = 0;
 	va_list argument;
-	char specifier;
-	char *begin *ptr;
-	flag *flag = FLAG_OFF; 
+	char *begin, *ptr;
+	flag flag = FLAG_OFF; 
 
-	format_mapping *format_map = get_format_map();
 	va_start(argument, format);
 	if (!format || (format[0] == '%' && !format[1]))
 		return (-1);
@@ -48,5 +45,5 @@ int _printf(const char *format, ...)
 	}
 	_putchar(FLUSH_BUFF);
 	va_end(argument);
-	return (count;
+	return (count);
 }

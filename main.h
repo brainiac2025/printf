@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdarg.h>
+#include <limits.h>
 
 #define BUFF_SIZE 1024
 #define FLUSH_BUFF -1
@@ -61,39 +62,39 @@ int mylen(char *string);
 
 int display(char ch);
 
-void print_integer(va_list argument, flag *flag);
+int print_integer(va_list argument, flag *flag);
 
 unsigned int power(unsigned int num, unsigned int p);
 
 unsigned int count_digit(unsigned int num);
 
-void print_unsigned_int(va_list argument, flag *flag);
+int print_unsigned_int(va_list argument, flag *flag);
 
-void print_octal(va_list argument, flag *flag);
+int print_octal(va_list argument, flag *flag);
 
-void print_hex_lower(va_list argument, flag *flag);
+int print_hex_lower(va_list argument, flag *flag);
 
-void print_hex_upper(va_list argument, flag *flag);
+int print_hex_upper(va_list argument, flag *flag);
 
-void print_binary(va_list argument, flag *flag);
+int print_binary(va_list argument, flag *flag);
 
-void print_string(va_list argument, flag *flag);
+int print_string(va_list argument, flag *flag);
 
-void string_miss_char(va_list flag flag *flag);
+int string_miss_char(va_list argument, flag *flag);
 
-void print_character(va_list argument, flag *flag);
+int print_character(va_list argument, flag *flag);
 
 void char_to_hex(char c, char *hex);
 
-void print_address(va_list argument, flag *flag);
+int print_address(va_list argument, flag *flag);
 
 void address_to_hex(void *ptr, char *hexstring);
 
-void numberToString(unsigned int num, char *string);
+int numberToString(unsigned int num, char *string);
 
-void reverse_string(va_list argument, flag *flag);
+int reverse_string(va_list argument, flag *flag);
 
-void rot13(va_list argument, flag *flag);
+int rot13(va_list argument, flag *flag);
 
 unsigned int binarylen(unsigned int num);
 
@@ -103,10 +104,28 @@ unsigned int oct_len(unsigned int num);
 
 void reverse(char *str);
 
-format_mapping *get_format_map();
-
 char *precise(char *ptr, va_list argument);
 
 void flag_init(flag *flag, va_list argument);
+
+int find_flag(char *ch, flag *flag);
+
+int find_modifier(char *ch, flag *flag);
+
+int find_func_toprint(char *ch, va_list argument, flag *flag);
+
+int (*get_format(char *ch)) (va_list argument, flag *flag);
+
+int _putchar(int chr);
+
+char *find_width(char *ch, va_list argument, flag *flag);
+
+char *find_precise(char *ch, flag *flag, va_list argument);
+
+int _isdigit(int ch);
+
+int print_range(char *begin, char *end, char *skip);
+
+int print_percent(va_list argument, flag *flag);
 
 #endif
