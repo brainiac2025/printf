@@ -33,7 +33,7 @@ int print_binary(va_list argument, flag *flag)
 
 	if (n == 0)
 	{
-		display('0');
+		_putchar('0');
 		return (0);
 	}
 

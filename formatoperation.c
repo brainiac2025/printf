@@ -5,7 +5,7 @@
  * @ch: the format string
  * Return: the number of bytes printed
  */
-int (*get_format(char *ch))(va_list argument, flag *flag)
+int (*get_format(char *ch)) (va_list argument, flag * flag)
 {
 	format_mapping format_map[] = {
 		{"c", print_character},

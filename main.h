@@ -60,7 +60,7 @@ int _printf(const char *format, ...);
 
 int mylen(char *string);
 
-int display(char ch);
+int display(char *string);
 
 int print_integer(va_list argument, flag *flag);
 

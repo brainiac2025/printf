@@ -72,7 +72,7 @@ int print_unsigned_int(va_list argument, flag *flag)
 	(void)flag;
 
 	if (num == 0)
-		display('0');
+		_putchar('0');
 
 	numdigit = count_digit(num);
 	mynum = malloc(sizeof(char) * numdigit);

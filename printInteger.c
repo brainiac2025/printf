@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * octlen - function to calculate octal len
+ * oct_len - function to calculate octal len
  * @num: the number
  * Return: the len
  */
@@ -55,12 +55,12 @@ int print_integer(va_list argument, flag *flag)
 
 	if (num == 0)
 	{
-		display('0');
+		_putchar('0');
 	}
 
 	if (num < 0)
 	{
-		display('-');
+		_putchar('-');
 		n = -num;
 	}
 	else
@@ -114,7 +114,7 @@ char *find_width(char *ch, va_list argument, flag *flag)
  * find_precise - function that get position from format string
  * @ch: the format string
  * @argument: the va_list arg
- * @flag, the flag format
+ * @flag: the flag format
  * Return: pointer to the function
  */
 char *find_precise(char *ch, flag *flag, va_list argument)

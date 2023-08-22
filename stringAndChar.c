@@ -8,10 +8,19 @@
  */
 int print_character(va_list argument, flag *flag)
 {
+	char empty = ' ';
+	unsigned int inc = 1;
+	int count = 0;
 	char ch = va_arg(argument, int);
-	(void)flag;
 
-	return (_putchar(ch));
+	if (flag->minus)
+		count += _putchar(ch);
+	while (inc++ < flag->width)
+		count += _putchar(empty);
+	if (!flag->minus)
+		count += _putchar(ch);
+
+	return (count);
 }
 
 /**
@@ -22,15 +31,44 @@ int print_character(va_list argument, flag *flag)
  */
 int print_string(va_list argument, flag *flag)
 {
-	int index = 0;
-	int count = 0;
+	char inc_char = ' ';
+	unsigned int index, count = 0;
+	unsigned int i;
+	unsigned int inc = 0;
 	char *string = va_arg(argument, char*);
 	(void)flag;
 
-	while (string[index] != '\0')
+	if ((int) (!string))
+		string = NULL_S;
+
+	if (flag->precise < inc)
+		index = inc = flag->precise;
+
+	if (flag->minus)
 	{
-		count += _putchar(string[index]);
-		index++;
+		if (flag->precise != UINT_MAX)
+		{
+			for (i = 0; i < inc; i++)
+				count += _putchar(*string++);
+		}
+		else
+		{
+			count += display(string);
+		}
+	}
+	while (index++ < flag->width)
+		count += _putchar(inc_char);
+	if (!flag->minus)
+	{
+		if (flag->precise != UINT_MAX)
+		{
+			for (i = 0; i < inc; i++)
+				count += _putchar(*string++);
+		}
+		else
+		{
+			count += display(string);
+		}
 	}
 	return (count);
 }

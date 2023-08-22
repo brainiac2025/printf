@@ -46,7 +46,7 @@ int string_miss_char(va_list argument, flag *flag)
 
 			for (i = 0; i < 4; i++)
 			{
-				display(sub[i]);
+				_putchar(sub[i]);
 			}
 			index++;
 		}

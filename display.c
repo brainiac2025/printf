@@ -2,12 +2,18 @@
 
 /**
  * display - function that write to screen
- * @ch: character to print
+ * @string: character to print
  * Return: equivalent int in memory
  */
-int display(char ch)
+int display(char *string)
 {
-	return (write(1, &ch, 1));
+	char *newch = string;
+
+	while (*string)
+	{
+		_putchar(*string++);
+	}
+	return (string - newch);
 }
 
 /**
