@@ -22,8 +22,7 @@ int _printf(const char *format, ...)
 		va_end(argument);
 		return (-1);
 	}
-	ptr = (char *)format;
-	while (*ptr++)
+	for (ptr = (char *)format; *ptr; ptr++)
 	{
 		flag_init(&flags, argument);
 		if (*ptr != '%')
