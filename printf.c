@@ -13,28 +13,29 @@ int _printf(const char *format, ...)
 	flag flags = FLAG_OFF;
 
 	va_start(argument, format);
-	if (!format || (format[0] == '%' && !format[1]))
-		return (-1);
-	if (format[0] == '%' && format[1] == ' ' && !format[2])
-		return (-1);
+	int invalidInput = (!format || (format[0] == '%'
+				&& !format[1])) ? 1 : 0;
+	int spaceError = (format[0] == '%' && format[1] ==
+			' ' && !format[2]) ? 1 : 0;
 
-	for (ptr = (char *)format; *ptr;  ptr++)
+	if (invalidInput || spaceError)
+	{
+		va_end(argument);
+		return (-1);
+	}
+	ptr = format;
+	while (*ptr)
 	{
 		flag_init(&flags, argument);
-		if (*ptr != '%')
-		{
-			count = count + _putchar(*ptr);
-			continue;
-		}
+		count += (*ptr != '%') ? _putchar(*ptr) : 0;
+		ptr++;
+		continue;
 		begin = ptr;
 		ptr++;
-		while (find_flag(ptr, &flags))
-		{
-			ptr++;
-		}
+		while (find_flag(ptr, &flags)
+				ptr++;
 		ptr = find_width(ptr, argument, &flags);
 		ptr = find_precise(ptr, &flags, argument);
-
 		if (find_modifier(ptr, &flags))
 			ptr++;
 		if (!get_format(ptr))
