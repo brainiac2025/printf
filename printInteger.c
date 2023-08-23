@@ -47,10 +47,10 @@ int print_integer(va_list argument, flag *flags)
  * find_width - function to that get width from the format string
  * @ch: the format
  * @argument: the va_list arg
- * @flag: the flag
+ * @flags: the flag
  * Return: the string
  */
-char *find_width(char *ch, va_list argument, flag *flag)
+char *find_width(char *ch, va_list argument, flag *flags)
 {
 	int temp = 0;
 
@@ -64,7 +64,7 @@ char *find_width(char *ch, va_list argument, flag *flag)
 		while (_isdigit(*ch))
 			temp = temp * 10 + (*ch++ - '0');
 	}
-	flag->width = temp;
+	flags->width = temp;
 	return (ch);
 }
 
@@ -72,10 +72,10 @@ char *find_width(char *ch, va_list argument, flag *flag)
  * find_precise - function that get position from format string
  * @ch: the format string
  * @argument: the va_list arg
- * @flag: the flag format
+ * @flags: the flag format
  * Return: pointer to the function
  */
-char *find_precise(char *ch, flag *flag, va_list argument)
+char *find_precise(char *ch, flag *flags, va_list argument)
 {
 	int precise = 0;
 
@@ -94,6 +94,6 @@ char *find_precise(char *ch, flag *flag, va_list argument)
 		while (_isdigit(*ch))
 			precise = precise * 10 + (*ch++ - '0');
 	}
-	flag->precise = precise;
+	flags->precise = precise;
 	return (ch);
 }

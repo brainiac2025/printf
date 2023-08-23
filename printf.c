@@ -10,7 +10,7 @@ int _printf(const char *format, ...)
 	int count = 0;
 	va_list argument;
 	char *begin, *ptr;
-	flag flag = FLAG_OFF;
+	flag flags = FLAG_OFF;
 
 	va_start(argument, format);
 	if (!format || (format[0] == '%' && !format[1]))
@@ -20,7 +20,7 @@ int _printf(const char *format, ...)
 
 	for (ptr = (char *)format; *ptr;  ptr++)
 	{
-		flag_init(&flag, argument);
+		flag_init(&flags, argument);
 		if (*ptr != '%')
 		{
 			count = count + _putchar(*ptr);
@@ -28,20 +28,20 @@ int _printf(const char *format, ...)
 		}
 		begin = ptr;
 		ptr++;
-		while (find_flag(ptr, &flag))
+		while (find_flag(ptr, &flags))
 		{
 			ptr++;
 		}
-		ptr = find_width(ptr, argument, &flag);
-		ptr = find_precise(ptr, &flag, argument);
+		ptr = find_width(ptr, argument, &flags);
+		ptr = find_precise(ptr, &flags, argument);
 
-		if (find_modifier(ptr, &flag))
+		if (find_modifier(ptr, &flags))
 			ptr++;
 		if (!get_format(ptr))
-			count += print_range(begin, ptr, flag.l_modifier
-					|| flag.h_modifier ? ptr - 1 : 0);
+			count += print_range(begin, ptr, flags.l_modifier
+					|| flags.h_modifier ? ptr - 1 : 0);
 		else
-			count += find_func_toprint(ptr, argument, &flag);
+			count += find_func_toprint(ptr, argument, &flags);
 	}
 	_putchar(FLUSH_BUFF);
 	va_end(argument);

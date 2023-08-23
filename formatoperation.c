@@ -5,7 +5,7 @@
  * @ch: the format string
  * Return: the number of bytes printed
  */
-int (*get_format(char *ch)) (va_list argument, flag * flag)
+int (*get_format(char *ch)) (va_list argument, flag * flags)
 {
 	format_mapping format_map[] = {
 		{"c", print_character},
@@ -55,32 +55,32 @@ int find_func_toprint(char *ch, va_list argument, flag *flags)
 /**
  * find_flag - function to find the flag func
  * @ch: the format string
- * @flag: the flag specifier
+ * @flags: the flag specifier
  * Return: flag if found
  */
-int find_flag(char *ch, flag *flag)
+int find_flag(char *ch, flag *flags)
 {
 	int myflag = 0;
 
 	if (*ch == '+')
 	{
-		myflag = flag->plus = 1;
+		myflag = flags->plus = 1;
 	}
 	else if (*ch == '#')
 	{
-		myflag = flag->hash = 1;
+		myflag = flags->hash = 1;
 	}
 	else if (*ch == ' ')
 	{
-		myflag = flag->space = 1;
+		myflag = flags->space = 1;
 	}
 	else if (*ch == '-')
 	{
-		myflag = flag->minus = 1;
+		myflag = flags->minus = 1;
 	}
 	else if (*ch == '0')
 	{
-		myflag = flag->zero = 1;
+		myflag = flags->zero = 1;
 	}
 	return (myflag);
 }
@@ -88,16 +88,16 @@ int find_flag(char *ch, flag *flag)
 /**
  * find_modifier - function to
  * @ch: the format string
- * @flag: the flag struct
+ * @flags: the flag struct
  * Return: modifier if found
  */
-int find_modifier(char *ch, flag *flag)
+int find_modifier(char *ch, flag *flags)
 {
 	int mymodifier = 0;
 
 	if (*ch == 'l')
-		mymodifier = flag->l_modifier = 1;
+		mymodifier = flags->l_modifier = 1;
 	else if (*ch == 'h')
-		mymodifier = flag->h_modifier = 1;
+		mymodifier = flags->h_modifier = 1;
 	return (mymodifier);
 }

@@ -77,19 +77,16 @@ int print_alignment(char *str, flag *flags, int isRightAlignment)
     /*Add padding on the right if right alignment is requested*/
 
 	if (isRightAlignment)
+	{
 		addPadding(&count, flags, &len, pad_char);
-
-    /*Print '-' sign if necessary*/
-	if (neg && pad_char == ' ')
 		count += _putchar('-');
-
-    /* Handle '+' for positive numbers (left alignment)*/
-	handlePositiveSign(&count, flags, &len, neg2);
-
-    /*Add padding on the left if left alignment is requested*/
-	if (!isRightAlignment)
+	}
+	else
+	{
+		count += _putchar('-');
 		addPadding(&count, flags, &len, pad_char);
-	/*Print the actual number*/
+	}
+
 	count += display(str);
 	return (count);
 }
